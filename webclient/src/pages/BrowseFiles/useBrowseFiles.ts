@@ -1,4 +1,5 @@
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect } from "react";
+import i18next from "i18next";
 import useSWR from "swr";
 
 export interface PentahoFile {
@@ -17,18 +18,17 @@ export interface PentahoFileTree {
 export const HOST = import.meta.env.VITE_HOST ?? "";
 
 export default () => {
-  const [finalData, setFinalData] = useState<PentahoFileTree>();
   const fetcher = useCallback(async (url: string) => {
     try {
       const { children: [data] } = await fetch(url).then((res) => res.json());
 
-      return data;
+      return data as PentahoFileTree;
     } catch (ex) {
       console.error("error fetching repository tree", ex);
     }
 
     return null;
-  }, [finalData]);
+  }, [i18next.language]);
 
   const {
     data,
@@ -43,12 +43,9 @@ export default () => {
     return `${HOST}/pentaho/plugin/scheduler-plugin/api/generic-files/tree?${params.toString()}`;
   }, fetcher);
 
-  // Prevents data from updating to undefined when loading (this crashes useHvData)
   useEffect(() => {
-    if (!isLoading && data) {
-      setFinalData(data);
-    }
-  }, [isLoading, data]);
+    mutate().then(() => console.log("mutated browse files"));
+  }, [i18next.language]);
 
-  return { data: finalData, isLoading, mutate };
+  return { data, isLoading, mutate };
 };

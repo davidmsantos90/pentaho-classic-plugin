@@ -1,0 +1,12 @@
+{
+  "headerActions": {
+    "changeLocale": "Change language"
+  },
+  "pages": {
+    "noPreview": "No preview",
+    "browseFiles": {
+      "viewer": "Viewer",
+      "editor": "Editor"
+    }
+  }
+}

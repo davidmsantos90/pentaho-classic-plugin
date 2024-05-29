@@ -26,7 +26,8 @@ export default defineConfig(({ mode }) => ({
     HvAppShellVitePlugin({
       mode,
       autoViewsAndRoutes: true,
-      autoMenu: true
+      autoMenu: true,
+      modules: ["src/header/ChangeLocaleButton/index.ts", "src/providers/Provider.tsx"],
     }),
   ],
 

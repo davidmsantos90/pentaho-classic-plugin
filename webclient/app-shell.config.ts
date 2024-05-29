@@ -7,6 +7,7 @@ export default (): HvAppShellConfig => ({
 
   header: {
     actions: [
+      { bundle: "@self/header/ChangeLocaleButton/index.js" },
       {
         bundle: "@hv/help-client/button.js",
         config: { url: "https://www.hitachivantara.com/", description: "Hitachi Vantara Help Link" }
@@ -32,4 +33,7 @@ export default (): HvAppShellConfig => ({
     }]
   },
 
+  providers: [
+    { bundle: "@self/providers/Provider.js" },
+  ]
 });
